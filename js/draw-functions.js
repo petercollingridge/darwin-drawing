@@ -1,3 +1,5 @@
+// Functions for drawing elements on the canvas
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const TAU = Math.PI * 2;

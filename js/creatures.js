@@ -1,3 +1,5 @@
+// Genes to define how to draw the creatures
+
 const lion = {
     head: {
         x: 400,
@@ -6,7 +8,7 @@ const lion = {
     },
     jaw: {
         angle: 0.8,
-        distance: 1,
+        distance: 0.85,
         r: 60
     },
 };
