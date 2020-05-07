@@ -1,7 +1,12 @@
 // Entry point for program. Determines what gets drawn
 
 function drawCreature(genes) {
-    const { head, jaw, eye } = genes;
+    const {
+        head,
+        jaw,
+        eye,
+        snout,
+    } = genes;
 
     // Build creature
     getJawCenter(head, jaw);
@@ -9,11 +14,12 @@ function drawCreature(genes) {
 
     // Draw creature
     ctx.fillStyle = 'none';
-    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgb(255, 255, 255, 100)';
 
     drawCircle(head);
     drawCircle(jaw);
     drawCircle(eye);
 }
 
-drawCreature(lion);
+addImage('tiger.jpg', scale=0.3, dx=100, dy=50, () => drawCreature(tiger));
