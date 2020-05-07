@@ -13,6 +13,13 @@ function drawCircle(p) {
     ctx.stroke();
 }
 
+function drawLine(p1, p2) {
+    ctx.beginPath(); 
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+    ctx.stroke();
+}
+
 function addImage(filename, scale=1, dx=0, dy=0, callback) {
     const image = new Image();
     image.src = 'images/' + filename;

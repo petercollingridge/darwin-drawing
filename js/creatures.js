@@ -12,17 +12,17 @@ const tiger = {
         r: 50
     },
     jaw: {
-        angle: 0.8,
-        distance: 0.85,
-        r: 60
+        angle: 0.96,
+        distance: 0.5,
+        r: 92
     },
     snout: {
-        angle: 0.3,
-        r: 80,
-        length: 130,
-        topLength: 1,
+        angle: 0.75,
+        r: 74,
+        length: 165,
+        topLength: 0.85,
         topSharpness: 0.3,
-        baseLength: 0.8,
+        baseLength: 1,
         baseSharpness: 0.4
     },
 };
