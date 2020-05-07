@@ -2,8 +2,8 @@
 
 const tiger = {
     head: {
-        x: 460,
-        y: 215,
+        x: 410,
+        y: 265,
         r: 135
     },
     eye: {
@@ -19,10 +19,14 @@ const tiger = {
     snout: {
         angle: 0.75,
         r: 74,
-        length: 165,
-        topLength: 0.85,
-        topSharpness: 0.3,
+        length: 180,
+        topLength: 0.74,
+        topSharpness: 0.6,
         baseLength: 1,
         baseSharpness: 0.4
     },
+    mouth: {
+        height: 0.5,
+        length: 0.1,
+    }
 };

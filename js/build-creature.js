@@ -37,3 +37,14 @@ function getNose(snout, jaw) {
         base: lerpPoint(snout.base, p3, lerp(0.2, 1, snout.baseLength))
     };
 }
+
+function getMouth(mouth, nose, snout) {
+    // Mouth as a proportional along the nose points
+    const p = lerp(0.2, 0.6, mouth.height);
+    mouth.start = lerpPoint(nose.base, nose.top, p);
+    mouth.stop = lerpPoint(snout.base, snout.top, p);
+
+    // Mouth isn't as long as the whole snout
+    const q = lerp(0.4, 0.8, mouth.length);
+    mouth.end = lerpPoint(mouth.start, mouth.stop, q);
+}
