@@ -1,6 +1,6 @@
 // Entry point for program. Determines what gets drawn
-const showImage = 1;
-const animal = 'fox';
+const showImage = 0;
+const animal = 'tiger';
 const genes = animalGenes[animal];
 
 function drawCreature(genes) {
