@@ -1,5 +1,7 @@
 // Entry point for program. Determines what gets drawn
 const showImage = 1;
+const animal = 'fox';
+const genes = animalGenes[animal];
 
 function drawCreature(genes) {
     const {
@@ -40,15 +42,17 @@ function drawCreature(genes) {
     arcLine(m, mouth.start, mouth.end, 0.8);
 }
 
-ctx.fillStyle = 'none';
-ctx.lineWidth = 1;
-ctx.strokeStyle = 'rgb(0, 0, 0, 0.5)';
-drawCreature(tiger);
 
 if (showImage) {
     ctx.fillStyle = 'none';
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'rgb(255, 0, 0, 0.5)';
-    addImage('tiger.jpg', scale=0.3, dx=50, dy=100, () => drawCreature(tiger));
+
+    addImageOfAnimal(animal, () => drawCreature(genes));
+} else {
+    ctx.fillStyle = 'none';
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgb(0, 0, 0, 0.5)';
+    drawCreature(genes);
 }
 

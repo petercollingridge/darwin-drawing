@@ -49,14 +49,3 @@ function arcLine(p1, p2, p3, curve) {
     ctx.lineTo(p3.x, p3.y);
     ctx.stroke();
 }
-
-function addImage(filename, scale=1, dx=0, dy=0, callback) {
-    const image = new Image();
-    image.src = 'images/' + filename;
-    image.onload = function() {
-        const imgWidth = image.width * scale;
-        const imgHeight = image.height * scale;
-        ctx.drawImage(image, dx, dy, imgWidth, imgHeight);
-        callback();
-    }
-}
