@@ -37,3 +37,23 @@ function circleOuterTangents(p1, p2) {
         { x: p2.x - c * p2.r, y: p2.y - d * p2.r }
     ];
 };
+
+// Return two points on a circle that form a tangent to a line
+// connecting them to a given point
+function pointCircleTangent(p1, c) {
+    const dist = distance(p1, c);
+    if (dist < c.r) { return; }
+    
+    const d = minus(p1, c);
+    const rho = c.r / dist;
+    const ad = rho * rho;
+    const bd = rho * Math.sqrt(1 - ad);
+    
+    return [{
+        x: c.x + ad * d.x - bd * d.y,
+        y: c.y + ad * d.y + bd * d.x
+    }, {
+        x: c.x + ad * d.x + bd * d.y,
+        y: c.y + ad * d.y - bd * d.x
+    }];
+};
