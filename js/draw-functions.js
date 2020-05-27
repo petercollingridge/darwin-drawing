@@ -49,3 +49,36 @@ function arcLine(p1, p2, p3, curve) {
     ctx.lineTo(p3.x, p3.y);
     ctx.stroke();
 }
+
+// Draw a curved line joining a line to a circle
+function curveLineToCircle(c, p1, p2, curve, above) {
+    const v = minus(c, p1);
+    const d = unitVector(p2, p1);
+
+    // Circle center projected on line
+    const dotP = dot(v, d);
+    const a = alongVector(p1, d, dotP);
+
+    // Intersection of circle tangent and line
+    const corner = alongVector(a, d, -c.r);
+
+    // Point along line p1-p2 where we draw a tangent
+    const m = lerpPoint(p1, i, curve);
+
+    // Get point on circle that is tangent to line connecting it to m
+    let t = pointCircleTangent(m, c);
+    if (!t) { return; }
+
+    if (above) {
+        t = t[0].y < t[1].y ? t[0] : t[1];
+    } else {
+        t = t[0].y > t[1].y ? t[0] : t[1];
+    }
+
+    // Bias curve to be closer to 1
+    curve = Math.sqrt(curve);
+    const arm1 = lerpPoint(p1, m, curve);
+    const arm2 = lerpPoint(t, m, curve);
+
+    return [arm1, arm2, t];
+}
