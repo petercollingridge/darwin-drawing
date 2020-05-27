@@ -7,9 +7,9 @@ const WIDTH = canvas.width;
 const HEIGHT = canvas.height;
 
 
-function drawCircle(p) {
+function drawCircle(p, r) {
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, TAU, true);
+    ctx.arc(p.x, p.y, r || p.r, 0, TAU, true);
     ctx.stroke();
 }
 
