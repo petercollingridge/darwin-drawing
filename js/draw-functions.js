@@ -7,6 +7,15 @@ const WIDTH = canvas.width;
 const HEIGHT = canvas.height;
 
 
+// Given a set of lines, draw them as a continuous path
+function drawPath(lines) {
+    const p = lines[0].p1
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    lines.forEach(line => line.draw());
+    ctx.stroke();
+}
+
 function getLine(p1, p2) {
     return {
         p1, p2,
@@ -23,14 +32,6 @@ function getBezier(p1, arm1, arm2, p2) {
             ctx.bezierCurveTo(arm1.x, arm1.y, arm2.x, arm2.y, p2.x, p2.y);
         }
     }
-}
-
-function drawPath(lines) {
-    const p = lines[0].p1
-    ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-    lines.forEach(line => line.draw());
-    ctx.stroke();
 }
 
 function drawCircle(p, r) {
@@ -76,7 +77,7 @@ function arcLine(p1, p2, p3, curve) {
 }
 
 // Draw a curved line joining a line to a circle
-function curveLineToCircle(c, p1, p2, curve, above) {
+function curveLineToCircle(c, p1, p2, curve, above, flip) {
     const v = minus(c, p1);
     const d = unitVector(p2, p1);
 
@@ -88,7 +89,7 @@ function curveLineToCircle(c, p1, p2, curve, above) {
     const corner = alongVector(a, d, -c.r);
 
     // Point along line p1-p2 where we draw a tangent
-    const m = lerpPoint(p1, i, curve);
+    const m = lerpPoint(p1, corner, curve);
 
     // Get point on circle that is tangent to line connecting it to m
     let t = pointCircleTangent(m, c);
@@ -105,5 +106,9 @@ function curveLineToCircle(c, p1, p2, curve, above) {
     const arm1 = lerpPoint(p1, m, curve);
     const arm2 = lerpPoint(t, m, curve);
 
-    return [arm1, arm2, t];
+    if (flip) {
+        return getBezier(t, arm2, arm1, p1);
+    } else {
+        return getBezier(p1, arm1, arm2, t);
+    }
 }
