@@ -20,7 +20,9 @@ function drawCreature(genes) {
     const nose = getNose(snout, jaw);
     getMouth(mouth, nose, snout);
 
-    // Draw creature
+    // Get array of lines to draw creature
+    let lines = [];
+
     drawCircle(head);
     // drawCircle(jaw);
     // drawCircle(snout);
@@ -33,13 +35,15 @@ function drawCreature(genes) {
 
     // Draw top of snout
     let m = lerpPoint(nose.top, mouth.start, 0.49);
-    arcLine(snout.top, nose.top, m, snout.topSharpness);
-    arcLine(m, mouth.start, mouth.end, 0.8);
+    lines = lines.concat(arcLine(snout.top, nose.top, m, snout.topSharpness));
+    lines = lines.concat(arcLine(m, mouth.start, mouth.end, 0.8));
 
     // Draw bottom of mouth
     m = lerpPoint(nose.base, mouth.start, 0.49);
-    arcLine(snout.base, nose.base, m, snout.baseSharpness);
-    arcLine(m, mouth.start, mouth.end, 0.8);
+    lines = lines.concat(arcLine(mouth.end, mouth.start, m, 0.8));
+    lines = lines.concat(arcLine(m, nose.base, snout.base, snout.baseSharpness));
+
+    drawPath(lines);
 }
 
 

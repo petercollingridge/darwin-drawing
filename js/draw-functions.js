@@ -7,6 +7,32 @@ const WIDTH = canvas.width;
 const HEIGHT = canvas.height;
 
 
+function getLine(p1, p2) {
+    return {
+        p1, p2,
+        draw: () => {
+            ctx.lineTo(p2.x, p2.y);
+        }
+    }
+}
+
+function getBezier(p1, arm1, arm2, p2) {
+    return {
+        p1, arm1, arm2, p2,
+        draw: () => {
+            ctx.bezierCurveTo(arm1.x, arm1.y, arm2.x, arm2.y, p2.x, p2.y);
+        }
+    }
+}
+
+function drawPath(lines) {
+    const p = lines[0].p1
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    lines.forEach(line => line.draw());
+    ctx.stroke();
+}
+
 function drawCircle(p, r) {
     ctx.beginPath();
     ctx.arc(p.x, p.y, r || p.r, 0, TAU, true);
@@ -42,12 +68,11 @@ function arcLine(p1, p2, p3, curve) {
         arm3 = lerpPoint(p3, p2, p);
     }
     
-    ctx.beginPath(); 
-    ctx.moveTo(p1.x, p1.y);
-    ctx.lineTo(arm1.x, arm1.y);
-    ctx.bezierCurveTo(arm2.x, arm2.y, arm3.x, arm3.y, arm4.x, arm4.y);
-    ctx.lineTo(p3.x, p3.y);
-    ctx.stroke();
+    return [
+        getLine(p1, arm1),
+        getBezier(arm1, arm2, arm3, arm4),
+        getLine(arm4, p3),
+    ];
 }
 
 // Draw a curved line joining a line to a circle
