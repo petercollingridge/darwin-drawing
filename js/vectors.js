@@ -46,5 +46,5 @@ function lerpPoint(p1, p2, p) {
 
 // Start at point p and move s units in the direction of v
 function alongVector(p, v, s) {
-    return add(p, mult(v, s));
+    return add(p, multiply(v, s));
 }
